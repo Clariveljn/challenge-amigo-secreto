@@ -151,10 +151,12 @@ ul {
     color: var(--color-white);
     background-color: var(--color-button);
     font-size: 16px;
+    margin-bottom: 20px;
 }
 
 .button-draw img {
     margin-right: 40px;
+    height: 30px;
 }
 
 .button-draw:hover {

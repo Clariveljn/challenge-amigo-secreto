@@ -52,3 +52,14 @@ function sortearAmigo() {
     const resultado = document.getElementById("resultado");
     resultado.innerHTML =`<li class="result-item">El amigo secreto es: <strong>${amigoSecreto}</strong></li>`;  
 }
+
+// Función para reiniciar el juego
+function reiniciarJuego() {
+    amigos = []; 
+    const listaAmigos = document.getElementById("listaAmigos");
+    const resultado = document.getElementById("resultado");
+    
+    listaAmigos.innerHTML = ""; 
+    resultado.innerHTML = "";  
+}
+
