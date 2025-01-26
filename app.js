@@ -12,6 +12,7 @@ function agregarAmigo() {
 
     if (amigos.includes(nombre)) {
         alert("El nombre ya está en la lista. Por favor, ingresa un nombre diferente.");
+        input.value = ""; 
         return;
     }
 
@@ -36,7 +37,12 @@ function mostrarLista() {
 //Función para seleccionar un amigo
 function sortearAmigo() {
     if (amigos.length === 0) {
-        alert("¡Aún no hay nadie en la lista! Por favor, añade al menos un nombre");
+        alert("¡Aún no hay nadie en la lista! Por favor, añade amigos a tu lista");
+        return;
+    }
+
+    if (amigos.length < 2) {
+        alert("¡La lista debe contener al menos 2 nombres para sortear un amigo secreto! Por favor, añade más nombres.");
         return;
     }
 
@@ -44,6 +50,5 @@ function sortearAmigo() {
     const amigoSecreto = amigos[indiceAleatorio];
 
     const resultado = document.getElementById("resultado");
-    resultado.innerHTML =`<li class="result-item">El amigo secreto es: <strong>${amigoSecreto}</strong></li>`;
-
+    resultado.innerHTML =`<li class="result-item">El amigo secreto es: <strong>${amigoSecreto}</strong></li>`;  
 }
