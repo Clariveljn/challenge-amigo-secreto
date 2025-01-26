@@ -10,6 +10,11 @@ function agregarAmigo() {
         return;
     }
 
+    if (amigos.includes(nombre)) {
+        alert("El nombre ya está en la lista. Por favor, ingresa un nombre diferente.");
+        return;
+    }
+
     amigos.push(nombre);
     mostrarLista();
     input.value = ""; 
