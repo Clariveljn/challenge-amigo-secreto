@@ -25,6 +25,14 @@ function agregarAmigo() {
         return;
     }
 
+    // Validación para no permitir números
+    const numeros = /\d/;
+    if (numeros.test(nombre)) {
+        alert("El nombre no debe contener números.");
+        input.value = "";
+        return;
+    }
+
     // Convertir a minúsculas para comparar
     nombre = nombre.toLowerCase();
 
