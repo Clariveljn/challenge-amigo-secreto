@@ -1,3 +1,15 @@
+document.addEventListener("DOMContentLoaded", () => {
+    const input = document.getElementById("amigo");
+
+    // Agregar amigo al presionar Enter
+    input.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault(); 
+            agregarAmigo();
+        }
+    });
+});
+
 let amigos = [];
 
 // Función para agregar un nombre
@@ -6,13 +18,32 @@ function agregarAmigo() {
     let nombre = input.value.trim();
 
     if (nombre === "") {
-        alert("Por favor, ingresa un nombre válido.");
+        Swal.fire({
+            title: "¡Error!",
+            text: "Por favor, ingresa un nombre válido.",
+            icon: "error",
+            confirmButtonText: "Aceptar",
+            customClass: {
+                title: "swal-title",
+                popup: "swal-popup",
+                confirmButton: "swal-button"
+            }
+        });
         return;
     }
 
-     // Validar que el nombre tenga minimo 3 letras
-     if (nombre.length < 3 ) {
-        alert("El nombre debe contener al menos 3 letras");
+    if (nombre.length < 3) {
+        Swal.fire({
+            title: "Nombre muy corto",
+            text: "El nombre debe contener al menos 3 letras.",
+            icon: "warning",
+            confirmButtonText: "Entendido",
+            customClass: {
+                title: "swal-title",
+                popup: "swal-popup",
+                confirmButton: "swal-button"
+            }
+        });
         return;
     }
 
@@ -20,7 +51,17 @@ function agregarAmigo() {
     const caracteresEspecialesYTildes = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?áéíóúüñ]/i;
     
     if (caracteresEspecialesYTildes.test(nombre)) {
-        alert("Por favor, no ingreses caracteres especiales ni tildes.");
+        Swal.fire({
+            title: "Caracteres no permitidos",
+            text: "Por favor, no ingreses caracteres especiales ni tildes.",
+            icon: "error",
+            confirmButtonText: "Aceptar",
+            customClass: {
+                title: "swal-title",
+                popup: "swal-popup",
+                confirmButton: "swal-button"
+            }
+        });
         input.value = "";
         return;
     }
@@ -28,7 +69,17 @@ function agregarAmigo() {
     // Validación para no permitir números
     const numeros = /\d/;
     if (numeros.test(nombre)) {
-        alert("El nombre no debe contener números.");
+        Swal.fire({
+            title: "Número no permitido",
+            text: "El nombre no debe contener números.",
+            icon: "warning",
+            confirmButtonText: "Aceptar",
+            customClass: {
+                title: "swal-title",
+                popup: "swal-popup",
+                confirmButton: "swal-button"
+            }
+        });
         input.value = "";
         return;
     }
@@ -37,7 +88,17 @@ function agregarAmigo() {
     nombre = nombre.toLowerCase();
 
     if (amigos.includes(nombre)) {
-        alert("El nombre ya está en la lista. Por favor, ingresa un nombre diferente.");
+        Swal.fire({
+            title: "Nombre repetido",
+            text: "El nombre ya está en la lista. Por favor, ingresa un nombre diferente.",
+            icon: "info",
+            confirmButtonText: "Aceptar",
+            customClass: {
+                title: "swal-title",
+                popup: "swal-popup",
+                confirmButton: "swal-button"
+            }
+        });
         input.value = "";
         return;
     }
@@ -92,4 +153,3 @@ function reiniciarJuego() {
     listaAmigos.innerHTML = "";
     resultado.innerHTML = "";
 }
-
