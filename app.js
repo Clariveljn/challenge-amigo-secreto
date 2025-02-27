@@ -1,6 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
     const input = document.getElementById("amigo");
 
+    // Deshabilitar botón al inicio
+    document.querySelector(".button-draw[onclick='reiniciarJuego()']").disabled = true;
+
     // Agregar amigo al presionar Enter
     input.addEventListener("keypress", function (event) {
         if (event.key === "Enter") {
@@ -32,6 +35,7 @@ function agregarAmigo() {
         return;
     }
 
+    //Validar que el nombre contenga al menos 3 letras
     if (nombre.length < 3) {
         Swal.fire({
             title: "Nombre muy corto",
@@ -106,6 +110,9 @@ function agregarAmigo() {
     amigos.push(nombre);
     mostrarLista();
     input.value = "";
+
+    // Habilitar botón "Reiniciar juego"
+    document.querySelector(".button-draw[onclick='reiniciarJuego()']").disabled = false;
 }
 
 // Función para mostrar la lista de amigos
@@ -147,6 +154,9 @@ function sortearAmigo() {
     const resultado = document.getElementById("resultado");
     const resultadoFormateado= amigoSecreto.replace(/\b\w/g,(l)=> l.toUpperCase());
     resultado.innerHTML = `<li class="result-item">El amigo secreto es: <strong>${resultadoFormateado}</strong></li>`;
+    
+    //deshabilitar botón sortear amigo
+    document.querySelector(".button-draw[onclick='sortearAmigo()']").disabled = true;
 }
 
 // Función para reiniciar el juego
@@ -157,4 +167,10 @@ function reiniciarJuego() {
 
     listaAmigos.innerHTML = "";
     resultado.innerHTML = "";
+
+    // Deshabilitar el botón de reinicio
+    document.querySelector(".button-draw[onclick='reiniciarJuego()']").disabled = true;
+
+    //habilitar botón sortear amigo
+    document.querySelector(".button-draw[onclick='sortearAmigo()']").disabled = false;
 }

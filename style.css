@@ -172,6 +172,11 @@ ul {
     font-size: 16px;
 }
 
+.button-draw:disabled {
+    background-color: var(--color-tertiary); 
+    cursor: not-allowed; 
+}
+
 .swal-title {
     font-family: "Merriweather", serif;
     font-weight: 700;
