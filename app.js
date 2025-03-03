@@ -39,13 +39,13 @@ function agregarAmigo() {
         return mostrarAlerta("¡Error!", "Por favor, ingresa un nombre.", "error");
     }
    
-    const caracteresEspecialesYTildes = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?áéíóúüñ]/i;
+    const caracteresEspeciales = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?ü]/i;
     const numeros = /\d/;
 
     // Validar caracteres especiales
-    if (caracteresEspecialesYTildes.test(nombre)) {
+    if (caracteresEspeciales.test(nombre)) {
         input.value = "";
-        return mostrarAlerta("Caracteres no permitidos", "Por favor, no ingreses caracteres especiales ni tildes.", "error");
+        return mostrarAlerta("Caracteres no permitidos", "Por favor, no ingreses caracteres especiales.", "error");
     }
 
     // Validación para no permitir números
@@ -92,21 +92,68 @@ function mostrarLista() {
     });
 }
 
-//Función para seleccionar un amigo
-function sortearAmigo() {
-    if (amigos.length < 2) {
-        return mostrarAlerta("Lista insuficiente", "¡Debes agregar al menos 2 nombres para sortear un amigo secreto!", "warning");
-    }
-
-    const indiceAleatorio = Math.floor(Math.random() * amigos.length);
-    const amigoSecreto = amigos[indiceAleatorio];
-    const resultado = document.getElementById("resultado");
-    const resultadoFormateado= amigoSecreto.replace(/\b\w/g,(l)=> l.toUpperCase());
-    resultado.innerHTML = `<li class="result-item">El amigo secreto es: <strong>${resultadoFormateado}</strong></li>`;
-    
-    //deshabilitar botón sortear amigo
-    document.querySelector(".button-draw[onclick='sortearAmigo()']").disabled = true;
+// Función para lanzar confetti
+function lanzarConfetti() {
+    confetti({
+        particleCount: 100,
+        spread: 100,
+        origin: { y: 0.7} 
+    });
 }
+
+        function sortearAmigo() {
+            if (amigos.length < 2) {
+                return mostrarAlerta("Lista insuficiente", "¡Debes agregar al menos 2 nombres para sortear un amigo secreto!", "warning");
+            }
+        
+            const listaAmigos = document.getElementById("listaAmigos").getElementsByTagName("li");
+            let tiempo = 0;
+            let animacionSorteo;
+            let indiceActual = 0;
+        
+            // Iniciar animación en la lista de amigos
+            animacionSorteo = setInterval(() => {
+                if (listaAmigos.length > 0) {
+                    for (let item of listaAmigos) {
+                        item.classList.remove("resaltado");
+                    }
+        
+                    // Resaltar un nombre aleatorio de la lista
+                    indiceActual = Math.floor(Math.random() * listaAmigos.length);
+                    listaAmigos[indiceActual].classList.add("resaltado");
+                }
+        
+                tiempo += 200;
+                if (tiempo >= 2000) {
+                    clearInterval(animacionSorteo);
+                    setTimeout(() => {
+                        // Seleccionar el amigo secreto final
+                        const indiceFinal = Math.floor(Math.random() * amigos.length);
+                        const amigoSecreto = amigos[indiceFinal];
+
+                        //Formatear el nombre para que la primera letra de cada palabra sea mayúscula
+                        const nombreFormateado = amigoSecreto.replace(/\b\w/g, (l) => l.toUpperCase());
+        
+                        // Remover resaltados y marcar el amigo secreto
+                        for (let item of listaAmigos) {
+                            item.classList.remove("resaltado");
+                        }
+                        listaAmigos[indiceFinal].classList.add("amigo-secreto");
+        
+                        // Mostrar el mensaje final debajo de la lista
+                        resultado.innerHTML = `¡Felicidades <strong>${nombreFormateado}</strong>, eres el amigo secreto!`;
+
+                        // Lanzar confetti
+                        lanzarConfetti();
+        
+                        // Deshabilitar botón sortear amigo
+                        document.querySelector(".button-draw[onclick='sortearAmigo()']").disabled = true;
+                    }, 300);
+                }
+            }, 100);
+        }
+        
+    
 
 // Función para reiniciar el juego
 function reiniciarJuego() {
