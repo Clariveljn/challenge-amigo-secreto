@@ -54,11 +54,11 @@ La aplicación se adapta automáticamente a diferentes tamaños de pantalla para
       <br>Vista en móviles
     </td>
     <td align="center">
-      <img src="assets/vista_para_tabletas.png" width="530"/>
+      <img src="assets/vista_para_tabletas.png" width="538"/>
       <br>Vista en tabletas
     </td>
     <td align="center">
-      <img src="assets/vista_de_escritorio.png" width="700"/>
+      <img src="assets/vista_de_escritorio.png" width="718"/>
       <br>Vista en escritorio
     </td>
   </tr>
