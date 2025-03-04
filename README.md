@@ -46,9 +46,25 @@ Después del sorteo, se muestra el nombre del amigo secreto con una animación d
 
 ### 📱 Diseño Responsivo
 La aplicación se adapta automáticamente a diferentes tamaños de pantalla para garantizar una experiencia óptima en dispositivos móviles, tabletas y computadoras.
-![Vista en móviles](assets/vista_para_moviles.png)
-![Vista en tabletas](assets/vista_para_tabletas.png)
-![Vista en escritorio](assets/vista_de_escritorio.png)
+
+<table border="none">
+  <tr>
+    <td align="center">
+      <img src="assets/vista_para_moviles.png" width="200"/>
+      <br>Vista en móviles
+    </td>
+    <td align="center">
+      <img src="assets/vista_para_tabletas.png" width="530"/>
+      <br>Vista en tabletas
+    </td>
+    <td align="center">
+      <img src="assets/vista_de_escritorio.png" width="700"/>
+      <br>Vista en escritorio
+    </td>
+  </tr>
+</table>
+
+
 
 ## 📁 Estructura del Proyecto
 ```
